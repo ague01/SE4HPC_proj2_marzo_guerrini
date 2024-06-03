@@ -32,3 +32,6 @@ jobs:
 
     - name: Run a singularity container
       run: singularity run docker://alpine cat /etc/os-release
+
+    - name: Build Singularity container
+      run: sudo singularity build --sandbox matrixmult Singularity.def
