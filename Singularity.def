@@ -1,0 +1,23 @@
+Bootstrap: library
+From: ubuntu:22.04
+Stage: build
+
+%files
+    . .
+
+%post
+   ./build
+
+%runscript
+    echo "Container was created $NOW"
+    echo "Arguments received: $*"
+    exec echo "$@"
+   
+
+%labels
+    Author Pierpaolo Marzo, Alberto Guerrini
+    Version 1.0
+
+
+%help
+    This is a simple container for an MPI matrix multiplication
