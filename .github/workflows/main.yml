@@ -1,0 +1,29 @@
+name: project2
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup CMake
+      uses: jwlawson/actions-setup-cmake@v1
+
+    - name: Configure CMake
+      run: cmake -S . -B build
+    
+    - name: Build
+      run: cmake --build build
+
+    - name: Run Tests
+      run: ctest --test-dir build
+
+    - name: Install Singularity dependencies
+      run: ??
+
+    - name: Install Singularity
+      run: ??
