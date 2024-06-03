@@ -10,6 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: mpi4py/setup-mpi@v1
+    - uses: snickerbockers/submodules-init@v4
+            
 
     - name: Setup CMake
       uses: jwlawson/actions-setup-cmake@v1
