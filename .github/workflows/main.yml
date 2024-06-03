@@ -29,4 +29,4 @@ jobs:
     - uses: eWaterCycle/setup-singularity@v7
 
     - name: Run a singularity container
-      run: singularity run docker://alpine cat /etc/os-release
+    - run: singularity run docker://alpine cat /etc/os-release
