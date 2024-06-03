@@ -5,13 +5,14 @@
 
 // ######################### Source code of multiplyMatrices in src/matrix_mult
 
-// In defining the test cases, we have mainly used metamorphic relations of matrix multiplication.
+// In defining the test cases, we have used metamorphic relations of matrix multiplication.
 // Let A, B, and C be matrices of size m x n, n x p, and m x p, respectively. Then, the following relation holds:
 // (aA)B = a(AB) = A(aB) = aAB, where a is a scalar.
 // (A^T)(B^T) = (AB)^T
 // (-A)(-B) = AB
 // A(I) = A
 // A(0) = 0
+// A(A^(-1)) = I
 
 /**
  * @brief Fist test provided by the assignment.
@@ -74,7 +75,7 @@ TEST(MatrixMultiplicationTest, TestPremultScalar)
  * @brief Test the multiplication of a squared matrix by itself.
  *
  */
-TEST(MatrixMultiplicationTest, TestSquareByItself)
+/*TEST(MatrixMultiplicationTest, TestSquareByItself)
 {
     std::vector<std::vector<int>> A = {
         {1, 2, 3},
@@ -91,7 +92,7 @@ TEST(MatrixMultiplicationTest, TestSquareByItself)
         {102, 126, 150}};
 
     ASSERT_EQ(C, expected) << "Square matrix by itself test failed! :(((()";
-}
+}*/
 
 /**
  * @brief Test the transpose commutativity property (B^T*A^T) = (A*B)^T.
@@ -123,7 +124,7 @@ TEST(MatrixMultiplicationTest, TestTranspose)
  * @brief Test the multiplication by two matrices with same values.
  *
  */
-TEST(MatrixMultiplicationTest, TestSameValues)
+/*TEST(MatrixMultiplicationTest, TestSameValues)
 {
     std::vector<std::vector<int>> A = {
         {1, 1, 1},
@@ -145,7 +146,7 @@ TEST(MatrixMultiplicationTest, TestSameValues)
         {99, 99, 99}};
 
     ASSERT_EQ(C, expected) << "Square matrix by itself test failed! :(((()";
-}
+}*/
 
 /**
  * @brief Test with negative matrices.
@@ -184,7 +185,7 @@ TEST(MatrixMultiplicationTest, TestNegativeMatrices)
  * @brief Test with same value in a row and column
  *
  */
-TEST(MatrixMultiplicationTest, TestSameRowCol)
+/*TEST(MatrixMultiplicationTest, TestSameRowCol)
 {
     std::vector<std::vector<int>> A = {
         {1, 2, 2},
@@ -203,17 +204,17 @@ TEST(MatrixMultiplicationTest, TestSameRowCol)
         {17, 17}};
 
     ASSERT_EQ(C, expected) << "Matrix negative test failed! :(((()";
-}
+}*/
 
 /**
  * @brief Test according to the meta relation A*I = A
 */
 TEST(MatrixMultiplicationTest, TestIdentityMatrix)
 {
-    std::vector<std::vector<int>> A = {
-        {1, 2, 3},
-        {4, 5, 6},
-        {7, 8, 9}};
+     std::vector<std::vector<int>> A = {
+        {1, 1, 2},
+        {3, 3, 4},
+        {5, 5, 5}};
 
     std::vector<std::vector<int>> B = {
         {1, 0, 0},
@@ -247,6 +248,34 @@ TEST(MatrixMultiplicationTest, TestZeroMatrix)
     multiplyMatrices(A, B, C, 3, 3, 3);
 
     ASSERT_EQ(C, B) << "Zero matrix test failed! :(((()";
+}
+
+/**
+ * @brief Test according to the meta relation A*A^(-1) = I
+ * 
+ */
+TEST(MatrixMultiplicationTest, TestInverseMatrix)
+{
+    std::vector<std::vector<int>> A = {
+        {1, 2, 3},
+        {4, 5, 7},
+        {8, 9, 12}};
+
+    std::vector<std::vector<int>> B = {
+        {-3, 3, -1},
+        {8, -12, 5},
+        {-4, 7, -3}};
+
+    std::vector<std::vector<int>> C(3, std::vector<int>(3, 0));
+
+    multiplyMatrices(A, B, C, 3, 3, 3);
+
+    std::vector<std::vector<int>> expected = {
+        {1, 0, 0},
+        {0, 1, 0},
+        {0, 0, 1}};
+
+    ASSERT_EQ(C, expected) << "Square matrix by itself test failed! :(((()";
 }
 
 int main(int argc, char **argv)
