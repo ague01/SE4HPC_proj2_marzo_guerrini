@@ -3,35 +3,42 @@ name: project2
 on: [push]
 
 jobs:
-  build:
-
+  build-and-containerize:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
     - uses: mpi4py/setup-mpi@v1
     - uses: snickerbockers/submodules-init@v4
-            
 
     - name: Setup CMake
       uses: jwlawson/actions-setup-cmake@v1
 
     - name: Configure CMake
       run: cmake -S . -B build
-    
+
     - name: Build
       run: cmake --build build
 
     - name: Run Tests
       run: ctest --test-dir build
 
-    - name: Install Singularity dependencies
+    - name: Install Singularity
       uses: eWaterCycle/setup-singularity@v7
       with:
         singularity-version: 3.8.3
 
-    - name: Run a singularity container
+    - name: Run a singularity container to test installation
       run: singularity run docker://alpine cat /etc/os-release
 
     - name: Build Singularity container
-      run: sudo singularity build --sandbox matrixmult Singularity.def
+      run: singularity build --fakeroot mat_mul Singularity.def
+
+    - name: Copy container to artifacts
+      uses: actions/upload-artifact@v4
+          with:
+            name: mat_mul
+            path: mat_mul
+
+    - name: Run Singularity container
+      run: singularity run mat_mul

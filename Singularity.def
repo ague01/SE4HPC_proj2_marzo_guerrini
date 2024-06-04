@@ -1,18 +1,34 @@
-Bootstrap: library
-From: ubuntu:22.04
-Stage: build
+Bootstrap: docker
+From: ubuntu:latest
 
 %files
-    . .
+    ./include       /app/include
+    ./googletest    /app/googletest
+    ./lib           /app/lib
+    ./src           /app/src
+    ./test          /app/test
+
+    ./CMakeLists.txt    /app/CMakeLists.txt
+    ./matrixA.txt       /app/matrixA.txt
+    ./matrixB.txt       /app/matrixB.txt
+
 
 %post
-   ./build
+    apt update
+    apt install -y g++ cmake make
+    apt install -y libopenmpi-dev
+
+    mkdir /app/build && cd /app/build
+    cmake ..
+    cmake --build .
+
+    cp /app/build /app
+
 
 %runscript
-    echo "Container was created $NOW"
     echo "Arguments received: $*"
-    exec echo "$@"
-   
+    exec ./app/main $*
+
 
 %labels
     Author Pierpaolo Marzo, Alberto Guerrini
@@ -20,4 +36,5 @@ Stage: build
 
 
 %help
-    This is a simple container for an MPI matrix multiplication
+    This is a simple container executing MPI matrix multiplication
+    Usage: mpirun -n 2 singularity run mat_mul
