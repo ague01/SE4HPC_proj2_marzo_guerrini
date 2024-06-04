@@ -41,4 +41,7 @@ jobs:
         path: mat_mul
 
     - name: Run Singularity container
-      run: singularity run mat_mul
+      run: mpirun -n 2 singularity run mat_mul
+
+    - name: Install sshpass
+      run: sudo apt-get install sshpass
