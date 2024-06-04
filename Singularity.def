@@ -25,11 +25,6 @@ From: ubuntu:latest
     cp /app/build/main /app/main
 
 
-%runscript
-    echo "Arguments received: $*"
-    exec /app/main $*
-
-
 %labels
     Author Pierpaolo Marzo, Alberto Guerrini
     Version 1.0

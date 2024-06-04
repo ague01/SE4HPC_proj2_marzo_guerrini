@@ -11,4 +11,4 @@ module load openmpi
 export HWLOC_COMPONENTS=-gl
 export OMPI_MCA_btl=^openib
 
-mpirun -n 2 singularity run mat_mul
+mpirun -n 2 singularity run mat_mul /app/main
