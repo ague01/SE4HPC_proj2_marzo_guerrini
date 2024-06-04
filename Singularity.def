@@ -27,7 +27,7 @@ From: ubuntu:latest
 
 %runscript
     echo "Arguments received: $*"
-    exec ./app/main $*
+    exec /app/main $*
 
 
 %labels
