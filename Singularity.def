@@ -9,8 +9,8 @@ From: ubuntu:latest
     ./test          /app/test
 
     ./CMakeLists.txt    /app/CMakeLists.txt
-    ./matrixA.txt       /app/matrixA.txt
-    ./matrixB.txt       /app/matrixB.txt
+    ./matrixA.txt       /matrixA.txt
+    ./matrixB.txt       /matrixB.txt
 
 
 %post
