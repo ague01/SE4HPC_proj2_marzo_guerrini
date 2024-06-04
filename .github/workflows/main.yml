@@ -36,9 +36,9 @@ jobs:
 
     - name: Copy container to artifacts
       uses: actions/upload-artifact@v4
-          with:
-            name: mat_mul
-            path: mat_mul
+      with:
+        name: mat_mul
+        path: mat_mul
 
     - name: Run Singularity container
       run: singularity run mat_mul
