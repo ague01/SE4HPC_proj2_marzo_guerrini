@@ -22,7 +22,7 @@ From: ubuntu:latest
     cmake ..
     cmake --build .
 
-    cp /app/build /app
+    cp /app/build/main /app/main
 
 
 %runscript
