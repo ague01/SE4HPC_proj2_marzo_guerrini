@@ -4,6 +4,7 @@
 #SBATCH --ntasks=2
 #SBATCH --time=00:05:00
 #SBATCH --output=output_file.txt
+#SBATCH --error=error_file.txt
 #SBATCH --partition=g100_all_serial
 
 module load openmpi
