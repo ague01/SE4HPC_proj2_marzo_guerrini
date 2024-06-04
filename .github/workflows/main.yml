@@ -44,7 +44,7 @@ jobs:
       run: sudo apt-get install sshpass
 
     - name: Upload Singularity Image
-          run: sshpass -p ${{ secrets.PASS }} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null mat_mul run_script.sh ${{ vars.USER }}@login.g100.cineca.it:/g100/home/usertrain/${{ vars.USER }}/
+      run: sshpass -p ${{ secrets.PASS }} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null mat_mul run_script.sh ${{ vars.USER }}@login.g100.cineca.it:/g100/home/usertrain/${{ vars.USER }}/
 
     - name: Run Job on galileo
-          run: sshpass -p ${{ secrets.PASS }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ vars.USER }}@login.g100.cineca.it 'sbatch' < run_script.sh
+      run: sshpass -p ${{ secrets.PASS }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ vars.USER }}@login.g100.cineca.it 'sbatch' < run_script.sh
